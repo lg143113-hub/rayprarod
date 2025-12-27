@@ -141,7 +141,7 @@ end
 local function loadSettings()
 	local file = nil
 
-	local success, result =	pcall(function()
+	local success, result = pcall(function()
 		task.spawn(function()
 			if isfolder and isfolder(RayfieldFolder) then
 				if isfile and isfile(RayfieldFolder..'/settings'..ConfigurationExtension) then
@@ -156,9 +156,10 @@ local function loadSettings()
 	]]
 			end
 
-
 			if file then
-				local success, decodedFile = pcall(function() return HttpService:JSONDecode(file) end)
+				local success, decodedFile = pcall(function()
+					return HttpService:JSONDecode(file)
+				end)
 				if success then
 					file = decodedFile
 				else
@@ -167,7 +168,6 @@ local function loadSettings()
 			else
 				file = {}
 			end
-
 
 			if not settingsCreated then 
 				cachedSettings = file
@@ -188,6 +188,7 @@ local function loadSettings()
 					end
 				end
 			end
+
 			settingsInitialized = true
 
 			if applyBackgroundImageFromSettings then
@@ -196,12 +197,15 @@ local function loadSettings()
 		end)
 	end)
 
+end
+
 
 if debugX then
 	warn('Now Loading Settings Configuration')
 end
 
 loadSettings()
+
 
 if debugX then
 	warn('Settings Loaded')
